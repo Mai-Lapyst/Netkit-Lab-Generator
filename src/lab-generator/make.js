@@ -84,7 +84,8 @@ function makeOther(netkit, lab) {
 		if (machine.name && machine.name != "" && machine.type == "other" && machine.other.image) {
 			lab.file["lab.conf"] += machine.name + '[image]="' + machine.other.image + '"\n';
 			for (let file of machine.other.files) {
-				lab.file["/etc/scripts/" + file.name] = file.contents;
+				lab.folders.push(machine.name + "/etc/scripts")
+				lab.file[machine.name + "/etc/scripts/" + file.name] = file.contents;
 			}
 		}
 	}
