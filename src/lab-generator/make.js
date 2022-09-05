@@ -383,6 +383,12 @@ function makeStaticRouting(netkit, lab) {
 						interface.ip = "192.168.100.1/24";
 					}
 				}
+
+				//ifconfig eth_ hw ether MACADDRESS
+				if (interface.mac_addr) {
+					lab.file[machine.name + ".startup"] += "ifconfig eth" + interface.eth.number + " hw ether " + interface.mac_addr + "\n";
+				}
+
 				//ifconfig eth_ SELFADDRESS/MASK up
 				if (interface.eth.domain && interface.eth.domain != "" && interface.ip && interface.ip != "") {
 					lab.file[machine.name + ".startup"] += "ifconfig eth" + interface.eth.number + " " + interface.ip + " up\n";
